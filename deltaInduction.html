@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>MENTOR  WEB PAGE</TITLE>
+</HEAD>
+<STYLE>
+TABLE,TH,TD{
+BORDER:1PX SOLID WHITE;
+TEXT-ALIGN:CENTER;
+BORDER="10" WIDTH="75%" CELL PADDING="7" CELL SPACING="6" ;
+}
+@MEDIA ONLY SCREEN AND (MIN-DEVICE-WIDTH:320PX) AND (MAX-DEVICE-WIDTH:480PX){
+BODY{
+WIDTH:50%;
+}
+}
+</STYLE>
+<BODY  BACKGROUND="http://images5.fanpop.com/image/photos/27700000/hydrangeas-flower-windows-7-vista-and-xp-picks-27753129-1024-768.jpg">
+<H1 STYLE="COLOR:WHITE">WELCOME TO MENTOR WEB PAGE</H1>
+<HR>
+<P STYLE="COLOR:YELLOW">WELCOME MENTOR</P>
+<TABLE  STYLE="COLOR:WHITE" ID="MYTABLE" >
+<TR BGCOLOR="BLACK" STYLE="COLOR:WHITE">
+<TH><B>MENTEES:</B></TH>
+<TH><B>RATING:</B></TH>
+<TH><B>COMMENTS:</B></TH>
+<TH><B>EDIT/DELETE:</B></TH>
+</TR>
+<TR BGCOLOR="BLACK" STYLE="COLOR:YELLOW">
+<TD><B>ENTER NAME:</B><INPUT TYPE="NAME"  ID="DEMO1"></TD>
+<TD>
+<LABEL FOR="RATING">
+<SPAN><B>ENTER RATING:</B></SPAN>
+</LABEL>
+<SELECT  ID="DEMO2" >
+<OPTION></OPTION>
+<OPTION VALUE="5">5</OPTION>
+<OPTION VALUE="4">4</OPTION>
+<OPTION VALUE="3">3</OPTION>
+<OPTION VALUE="2">2</OPTION>
+<OPTION VALUE="1">1</OPTION>
+</SELECT>
+</TD>
+<TD STYLE="COLOR:RED"><B>ENTER COMMENTS:</B><INPUT TYPE="NAME"  ID="DEMO3"></TD>
+</TR>
+</TABLE>
+<script>
+var k=1;
+function TOTABLE( )
+{
+var table=document.getElementById("MYTABLE");
+var len=table.rows.length;
+var row=table.insertRow(k++);
+var cell1=row.insertCell(0);
+var cell2=row.insertCell(1);
+var cell3=row.insertCell(2);
+var cell4=row.insertCell(3);
+var x=document.getElementById("DEMO1").value;
+var y=document.getElementById("DEMO2").value;
+var z=document.getElementById("DEMO3").value;
+cell1.innerHTML=x+"<br><td><input type='button' class='edit' onclick='DISPLAY(this)'  value='CLICK HERE FOR DETAILS'></td>";
+cell2.innerHTML=y;
+cell3.innerHTML=z;
+cell4.innerHTML="<td><input type='button' class='edit' onclick='EDIT(this)'  value='EDIT'><input type='button' class='save' onclick='SAVE(this)'  value='SAVE'><br><input type='button' class='delete' onclick='DELETE (this)'  value='DELETE'></td>";
+table.rows[len-1].cells[1].style.visibility='hidden';
+table.rows[len-1].cells[2].style.visibility='hidden';
+table.rows[len-1].cells[3].style.visibility='hidden';
+COLOR();
+}
+function COLOR( )
+{
+var table=document.getElementById("MYTABLE");
+var len=(table.rows.length)-1;
+for(let i=1;i<=len;i++)
+{
+if(table.rows[i].cells[1].style.visibility=='hidden')
+{
+table.rows[i].cells[1].style.visibility='visible';
+table.rows[i].cells[2].style.visibility='visible';
+table.rows[i].cells[3].style.visibility='visible';
+}
+}
+for(let i=1;i<=len;i++)
+{
+if(table.rows[i].cells[1].innerText==5)
+table.rows[i].style.backgroundColor='red';
+else if(table.rows[i].cells[1].innerText==4)
+table.rows[i].style.backgroundColor='blue';
+else if(table.rows[i].cells[1].innerText==3)
+table.rows[i].style.backgroundColor='orange';
+else if(table.rows[i].cells[1].innerText==2)
+table.rows[i].style.backgroundColor='black';
+else if(table.rows[i].cells[1].innerText==1)
+table.rows[i].style.backgroundColor='violet';
+}
+for(let i=1;i<=len;i++)
+{
+if(table.rows[i].cells[1].style.visibility=='visible')
+{
+table.rows[i].cells[1].style.visibility='hidden';
+table.rows[i].cells[2].style.visibility='hidden';
+table.rows[i].cells[3].style.visibility='hidden';
+}
+}
+}
+function EDIT(b)
+{
+var table=document.getElementById("MYTABLE");
+var p=b.parentNode.parentNode.rowIndex;
+table.rows[p].cells[0].innerHTML="<td><input id='q1' type='text' value=' '></td><br><td><input type='button' class='edit' onclick='DISPLAY(this)'  value='CLICK HERE FOR DETAILS'></td>";
+table.rows[p].cells[1].innerHTML="<td><input  id='q2' type='number' value=' '  min='1' max='5'></td>";
+table.rows[p].cells[2].innerHTML="<td><input  id='q3' type='text' value=' '></td>";
+}
+function CLEAR()
+{
+document.getElementById("DEMO1").value= ' ';
+document.getElementById("DEMO2").value= ' ';
+document.getElementById("DEMO3").value= ' ';
+}
+function DELETE(b)
+{
+var i=document.getElementById("MYTABLE");
+var p=b.parentNode.parentNode.rowIndex;
+document.getElementById("MYTABLE").deleteRow(p);
+k--;
+}
+function SAVE(b)
+{
+var table=document.getElementById("MYTABLE");
+var p=b.parentNode.parentNode.rowIndex;
+table.rows[p].cells[0].innerHTML=document.getElementById('q1').value+"<br><td><input type='button' class='edit' onclick='DISPLAY(this)'  value='CLICK HERE FOR DETAILS'></td>";
+table.rows[p].cells[1].innerHTML=document.getElementById('q2').value;
+table.rows[p].cells[2].innerHTML=document.getElementById('q3').value;
+table.rows[p].style.backgroundColor='';
+COLOR();
+}
+function SORT( )
+{
+var temp1;
+var table=document.getElementById("MYTABLE");
+var len=(table.rows.length)-1;
+for(let i=1;i<=len;i++)
+{
+if(table.rows[i].cells[1].style.visibility=='hidden')
+{
+table.rows[i].cells[1].style.visibility='visible';
+table.rows[i].cells[2].style.visibility='visible';
+table.rows[i].cells[3].style.visibility='visible';
+}
+}
+for(let i=1;i<=len;i++)
+{
+var temp=table.rows[i].cells[1].innerText;
+for(let j=i+1;j<=len;j++)
+{
+if(temp>table.rows[j].cells[1].innerText)
+{
+temp1=table.rows[j].cells[0].innerHTML;
+table.rows[j].cells[0].innerHTML=table.rows[i].cells[0].innerHTML;
+table.rows[i].cells[0].innerHTML=temp1;
+temp1=table.rows[j].cells[1].innerText;
+table.rows[j].cells[1].innerText=table.rows[i].cells[1].innerText;
+table.rows[i].cells[1].innerText=temp1;
+temp1=table.rows[j].cells[2].innerText;
+table.rows[j].cells[2].innerText=table.rows[i].cells[2].innerText;
+table.rows[i].cells[2].innerText=temp1;
+temp1=table.rows[j].style.backgroundColor;
+table.rows[j].style.backgroundColor=table.rows[i].style.backgroundColor;
+table.rows[i].style.backgroundColor=temp1;
+}
+}
+}
+for(let i=1;i<=len;i++)
+{
+if(table.rows[i].cells[1].style.visibility=='visible')
+{
+table.rows[i].cells[1].style.visibility='hidden';
+table.rows[i].cells[2].style.visibility='hidden';
+table.rows[i].cells[3].style.visibility='hidden';
+}
+}
+}
+function DISPLAY(b)
+{
+var table=document.getElementById("MYTABLE");
+var p=b.parentNode.parentNode.rowIndex;
+var len=table.rows.length;
+for(let i=1;i<len;i++)
+{
+if(table.rows[i].cells[1].style.visibility=='visible')
+{
+table.rows[i].cells[1].style.visibility='hidden';
+table.rows[i].cells[2].style.visibility='hidden';
+table.rows[i].cells[3].style.visibility='hidden';
+}
+}
+table.rows[p].cells[1].style.visibility='visible';
+table.rows[p].cells[2].style.visibility='visible';
+table.rows[p].cells[3].style.visibility='visible';
+}
+</script>
+<BUTTON ONCLICK="TOTABLE( )" STYLE="BORDER:3PX SOLID RED; BACKGROUND-COLOR:PINK">ENTER</BUTTON><BR>
+<BUTTON ONCLICK="CLEAR( )" STYLE="BORDER:3PX SOLID RED; BACKGROUND-COLOR:PINK">CLEAR INPUT FIELD</BUTTON><BR>
+<BUTTON ONCLICK="SORT( )"  STYLE="BORDER:3PX SOLID RED; BACKGROUND-COLOR:PINK">SORT</BUTTON><BR>
+</BODY>
+</HTML>
